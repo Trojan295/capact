@@ -239,6 +239,8 @@ jobs:
         with:
           name: test-${{ matrix.TEST }}-${{github.sha}}
           path: /tmp
+      - name: Simulate change
+        run: echo "here"
       - name: Load image
         run: docker load --input /tmp/${{ matrix.TEST }}-test.tar
       - name: Log into registry
