@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: Release
     permissions:
-      contents: read
+      contents: write
+      packages: write
       pull-requests: read
       issues: read
-      packages: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -61,6 +61,6 @@ jobs:
       - name: Generate release notes
         run: |
           npm install -g github-release-notes
-          gren release -T "${{ secrets.GITHUB_TOKEN }}" --tags "v${{ github.event.inputs.version }}" --override
+          gren release -d -T "${{ secrets.GITHUB_TOKEN }}" --tags "v${{ github.event.inputs.version }}" --override
       - name: Release Helm charts
         run: make release-charts
